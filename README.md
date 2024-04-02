@@ -26,9 +26,7 @@ And install the following packages:
 * pandas
 
 ```
-conda install -c conda-forge -c bioconda mgltools openbabel zlib --yes
-
-conda install pandas
+conda install -c conda-forge -c bioconda mgltools openbabel zlib pandas --yes
 ```
 
 If you don't already have `wget` installed (use `which wget` to check), install it:
@@ -41,11 +39,12 @@ pip install wget
 
 NOTE: For each of these steps, make sure to read the _contents_ of each script before you run the script.  This way, you will know what is going on, and can debug if something goes wrong.
 
-1. Follow the instructions in the `runme_setup` document to prepare the receptor
-2. Prepare the ligands using `python prepare_ligands.py` 
-3. Dock the ligands using `python docking.py` (**IMPORTANT**! This step should be run interactively on one of the nodes of Owlsnest, see below) 
-4. Visualize the docking results in ChimeraX (`scp` the `receptor.pdbqt` and `[ligand]_out.pdbqt` files to your personal computer to view them)
-5. Analyze the Vina score vs. RMSD-to-xtal using `python analysis.py`  (NOTE: this script downloads and uses a tool called [DockRMSD](https://zhanggroup.org/DockRMSD/) from the Zhang group at University of Michigan to compute RMSD for molecules with symmetry or permuted atom orders.)
+1. Run `./download_gnina` to get an executable copy of gnina.
+2. Prepare the receptor using `python prepare_receptor.py`
+3. Prepare the ligands using `python prepare_ligands.py` 
+4. Dock the ligands using `python docking.py` (**IMPORTANT**! This step should be run interactively on one of the nodes of Owlsnest, see below) 
+5. Visualize the docking results in ChimeraX (`scp` the `receptor.pdbqt` and `[ligand]_out.pdbqt` files to your personal computer to view them)
+6. Analyze the Vina score vs. RMSD-to-xtal using `python analysis.py`  (NOTE: this script downloads and uses a tool called [DockRMSD](https://zhanggroup.org/DockRMSD/) from the Zhang group at University of Michigan to compute RMSD for molecules with symmetry or permuted atom orders.)
 
 ### Running interactively on Owlsnest
 
