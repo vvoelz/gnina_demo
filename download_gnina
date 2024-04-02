@@ -1,0 +1,2 @@
+wget https://github.com/gnina/gnina/releases/download/v1.1/gnina
+chmod +x ./gnina
