@@ -1,5 +1,5 @@
 # gnina_demo
-A demo and tutorial for Autodock Vina
+A demo and tutorial for docking with GNINA
 
 ## Setup
  
