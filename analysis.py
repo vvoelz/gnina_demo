@@ -77,30 +77,54 @@ for method in methods:
               results[resultname]['RMSD-to-xtal'][j] = rmsd
 
 
-    # PRINT the results
+    # PRINT and SAVE the results
+
+    csvfile = f'docking_results/{resultname}.csv'
     print('-------------')
     print()
-    print(resultname)
+    print(f'Writing to {csvfile} ...')
+    fout = open(csvfile, 'w')
+
     num_poses = 9
     if method == 'smina':
 
       if ligand == 'donepezil':
-          print('pose, RMSD-to-xtal (A), minimizedAffinity (kcal/mol)')
+          header = 'pose,RMSD-to-xtal (A),minimizedAffinity (kcal/mol)'
+          print(header)
+          fout.write(header+'\n')
           for j in range(num_poses):
-              print(f"{j+1}, {results[resultname]['RMSD-to-xtal'][j]}, {results[resultname]['minimizedAffinity'][j]}")
+              line = f"{j+1}, {results[resultname]['RMSD-to-xtal'][j]}, {results[resultname]['minimizedAffinity'][j]}"
+              print(line)
+              fout.write(line+'\n')
       else:
-          print('pose, minimizedAffinity (kcal/mol)')
+          header = 'pose,minimizedAffinity (kcal/mol)'
+          print(header)
+          fout.write(header+'\n')
           for j in range(num_poses):
-              print(f"{j+1}, {results[resultname]['minimizedAffinity'][j]}")
+              line = f"{j+1}, {results[resultname]['minimizedAffinity'][j]}"
+              print(line)
+              fout.write(line+'\n')
+
 
     else:
 
       if ligand == 'donepezil':
-          print('pose, RMSD-to-xtal (A), CNNaffinity (pKd)')
+          header = 'pose,RMSD-to-xtal (A),CNNscore,CNNaffinity (pKd)'
+          print(header)
+          fout.write(header+'\n')
           for j in range(num_poses):
-              print(f"{j+1}, {results[resultname]['RMSD-to-xtal'][j]}, {results[resultname]['CNNaffinity'][j]}")
+              line = f"{j+1}, {results[resultname]['RMSD-to-xtal'][j]}, {results[resultname]['CNNscore'][j]}, {results[resultname]['CNNaffinity'][j]}"
+              print(line)
+              fout.write(line+'\n')
       else:
-          print('pose, CNNaffinity (pKd)')
+          header = 'pose,CNNscore,CNNaffinity (pKd)'
+          print(header)
+          fout.write(header+'\n')
           for j in range(num_poses):
-              print(f"{j+1}, {results[resultname]['CNNaffinity'][j]}")
+              line = f"{j+1}, {results[resultname]['CNNaffinity'][j]}"
+              print(line)
+              fout.write(line+'\n')
+
+    fout.close()
+
 
