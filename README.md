@@ -11,7 +11,7 @@ You can either download this to your local machine and `scp` to Owlsnest, or dow
 
 In the [vina_demo](https://github.com/vvoelz/vina_demo) repository, we created a conda enviroment called `vina` to prepare the receptor and ligands.  We will use this same enviroment for the gnina work here.
 
-### Create and set up your conda environment 
+## Create and set up your conda environment 
 
 ```
 conda create --name vina
@@ -35,16 +35,35 @@ If you don't already have `wget` installed (use `which wget` to check), install 
 pip install wget
 ```
 
-###  Next Steps
+##  Next Steps
 
 NOTE: For each of these steps, make sure to read the _contents_ of each script before you run the script.  This way, you will know what is going on, and can debug if something goes wrong.
 
+### Preparation
+
 1. Run `./download_gnina` to get an executable copy of gnina.
 2. Prepare the receptor using `python prepare_receptor.py`
-3. Prepare the ligands using `python prepare_ligands.py` 
-4. Dock the ligands using `python docking.py` (**IMPORTANT**! This step should be run interactively on one of the nodes of Owlsnest, see below) 
-5. Visualize the docking results in ChimeraX (`scp` the `receptor.pdbqt` and `[ligand]_out.pdbqt` files to your personal computer to view them)
-6. Analyze the Vina score vs. RMSD-to-xtal using `python analysis.py`  (NOTE: this script downloads and uses a tool called [DockRMSD](https://zhanggroup.org/DockRMSD/) from the Zhang group at University of Michigan to compute RMSD for molecules with symmetry or permuted atom orders.)
+3. Prepare the ligands using `python prepare_ligands.py`
+
+### Docking
+
+**IMPORTANT**! These steps should be run interactively on one of the nodes of Owlsnest, see below!
+
+4. For the "smina" and "gnina_rescore" protocols, dock the ligands using `python docking.py` (use `qsub -I -q normal` )
+5. For the "gnina_refinement" protocols, dock the ligands using `python docking_gpu.py` (use `qsub -I -q large` )
+
+
+### Analysis
+
+6. Run `./runme_before_analysis`.  This will:
+   * install rdkit
+   * make a PDB for the donepezil xtal pose ("input_files/donepezil_xtal.pdb")
+   * install a tool called [DockRMSD](https://zhanggroup.org/DockRMSD/) so we can compute RMSD-to-xtal for molecules with symmetry or permuted atom orders.
+7. Analyze the docking scores (and docking score vs. RMSD-to-xtal for donepezil) using `python analysis.py`.  This script will:
+   * parse all the output sdf files to get the docking scores 
+   * calculate RMSD-to-xtal for donepezil
+   * print and save to csv format tables with the results (e.g. "docking_results/gnina_rescore_huperzine.csv")
+8. You should visualize the docking results in ChimeraX (`scp` the `receptor.pdbqt` and the `scp -r` the entire `docking_results` folder files to your personal computer)
 
 ### Running interactively on Owlsnest
 
@@ -68,12 +87,6 @@ To exit the interactive job, use
 exit
 ```
 
-
-### References
-
-Full documentation of AutoDock Vina can be found here: https://autodock-vina.readthedocs.io/  
-
-Heavily inspired by https://colab.research.google.com/github/pb3lab/workshops/blob/main/tutorials/spb2022/D1_Tutorial2.ipynb#scrollTo=LRlv9MqoCC19 
 
 
 
