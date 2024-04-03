@@ -3,3 +3,9 @@ cat input_files/4ey7_chainA.pdb | grep E20 > input_files/donepezil_xtal.pdb
 
 # install rdkit -- we'll need this to analyze the results
 conda install rdkit
+
+## We will use DockRMSD to compute RMSD to xtal pose for donepezil
+wget https://seq2fun.dcmb.med.umich.edu//DockRMSD/DockRMSD.gz
+gunzip DockRMSD.gz
+chmod +x ./DockRMSD
+
