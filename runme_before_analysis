@@ -1,0 +1,5 @@
+# create a PDB with the xtal pose
+cat input_files/4ey7_chainA.pdb | grep E20 > input_files/donepezil_xtal.pdb
+
+# install rdkit -- we'll need this to analyze the results
+conda install rdkit
