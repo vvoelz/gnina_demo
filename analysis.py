@@ -17,11 +17,6 @@ def run_cmd(cmd, testing=False):
 
 # Main
 
-## We will use DockRMSD to compute RMSD to xtal pose for donepezil
-if not os.path.exists('./DockRMSD'):
-    run_cmd('wget https://seq2fun.dcmb.med.umich.edu//DockRMSD/DockRMSD.gz')
-    run_cmd('gunzip DockRMSD.gz')
-    run_cmd('chmod +x ./DockRMSD')
 
 # DockRMSD only works with *.mol2 files. So we need to
 # ...convert the xtal structure pose to mol2
