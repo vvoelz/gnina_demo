@@ -93,7 +93,7 @@ for method in methods:
           print(header)
           fout.write(header+'\n')
           for j in range(num_poses):
-              line = f"{j+1}, {results[resultname]['RMSD-to-xtal'][j]}, {results[resultname]['minimizedAffinity'][j]}"
+              line = f"{j+1},{results[resultname]['RMSD-to-xtal'][j]}, {results[resultname]['minimizedAffinity'][j]}"
               print(line)
               fout.write(line+'\n')
       else:
@@ -101,7 +101,7 @@ for method in methods:
           print(header)
           fout.write(header+'\n')
           for j in range(num_poses):
-              line = f"{j+1}, {results[resultname]['minimizedAffinity'][j]}"
+              line = f"{j+1},{results[resultname]['minimizedAffinity'][j]}"
               print(line)
               fout.write(line+'\n')
 
@@ -113,7 +113,7 @@ for method in methods:
           print(header)
           fout.write(header+'\n')
           for j in range(num_poses):
-              line = f"{j+1}, {results[resultname]['RMSD-to-xtal'][j]}, {results[resultname]['CNNscore'][j]}, {results[resultname]['CNNaffinity'][j]}"
+              line = f"{j+1},{results[resultname]['RMSD-to-xtal'][j]}, {results[resultname]['CNNscore'][j]}, {results[resultname]['CNNaffinity'][j]}"
               print(line)
               fout.write(line+'\n')
       else:
@@ -121,7 +121,7 @@ for method in methods:
           print(header)
           fout.write(header+'\n')
           for j in range(num_poses):
-              line = f"{j+1}, {results[resultname]['CNNaffinity'][j]}"
+              line = f"{j+1},{results[resultname]['CNNaffinity'][j]}"
               print(line)
               fout.write(line+'\n')
 
