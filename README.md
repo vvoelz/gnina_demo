@@ -64,6 +64,7 @@ NOTE: For each of these steps, make sure to read the _contents_ of each script b
    * calculate RMSD-to-xtal for donepezil
    * print and save to csv format tables with the results (e.g. "docking_results/gnina_rescore_huperzine.csv")
 8. You should visualize the docking results in ChimeraX (`scp` the `receptor.pdbqt` and the `scp -r` the entire `docking_results` folder files to your personal computer)
+9. I have provided a jupyter notebook with some example code to plot the results: [plot_results.ipynb](plot_results.ipynb)
 
 ### Running interactively on Owlsnest
 
