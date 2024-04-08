@@ -1,2 +1,8 @@
+# Download gnina exectuable
 wget https://github.com/gnina/gnina/releases/download/v1.1/gnina
 chmod +x ./gnina
+
+# CRAZY buut true -- we need to load the gromacs/2020.3 paths to access the same 
+# # shared libraries that gnina uses :(
+module load gromacs/2020.3
+
