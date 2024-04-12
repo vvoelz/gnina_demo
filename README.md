@@ -88,7 +88,40 @@ To exit the interactive job, use
 exit
 ```
 
+### Running a queued job via batch script
 
+If none of the gpu nodes in the `large` queue are free, you can submit a job to the queue using a batch script.  There is lots of good information about the Owlsnest batch system here: https://www.hpc.temple.edu/owlsnest2/batch_system/ 
+
+I have included an example batch script in `batch.sh`, which contains the following text:
+
+```
+#!/bin/sh
+#PBS -l walltime=1:00:00
+#PBS -N docking_gpu 
+#PBS -q large
+#PBS -l nodes=1:ppn=1
+#PBS -m bae
+#PBS -M [AccessNetID]@temple.edu
+#PBS
+cd $PBS_O_WORKDIR
+
+bash ~/.bashrc
+conda activate vina
+module load gcc/8.4.0
+python docking_gpu.py
+```
+
+Replace the `[AccessNetID]` with your own Temple email/AccessNet to get an email notification when it's done.
+
+Submit the batch script using
+```
+qsub batch.sh
+```
+
+To check the status of your job, use
+```
+qstat
+```
 
 
 
