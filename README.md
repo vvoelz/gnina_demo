@@ -75,11 +75,12 @@ Running any program that requires substantial computational resources is NOT ALL
 qsub -I -q normal
 ```
 
-This command will submit a queued shell job, and allow you to interact within it for up to 30 minutes (the docking should take less than a minute).  When you are logged into the node, you will be back in your $HOME directory, and in your base conda environment. You will need to change back to your working directory and activate your 'vina' conda environment like so:
+This command will submit a queued shell job, and allow you to interact within it for up to 30 minutes (the docking should take less than a minute).  When you are logged into the node, you will be back in your $HOME directory, and in your base conda environment. You will need to change back to your working directory, activate your 'vina' conda environment, and load the GCC libraries, like so:
 
 ```
 cd ~/work/git/vina_demo   # or wherever your work is
 conda activate vina
+module load gcc/8.4.0
 ```
 
 You now can continue to run scripts on the command line.  The jobs will run on the queued node, not the login node. 
