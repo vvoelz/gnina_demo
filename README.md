@@ -41,9 +41,10 @@ NOTE: For each of these steps, make sure to read the _contents_ of each script b
 
 ### Preparation
 
-1. Run `./download_gnina` to get an executable copy of gnina.
-2. Prepare the receptor using `python prepare_receptor.py`
-3. Prepare the ligands using `python prepare_ligands.py`
+1. Load the GCC v8.4 C++ shared libaries using `module load gcc/8.4.0`
+2. Run `./download_gnina` to get an executable copy of gnina.
+3. Prepare the receptor using `python prepare_receptor.py`
+4. Prepare the ligands using `python prepare_ligands.py`
 
 ### Docking
 
