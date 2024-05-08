@@ -41,9 +41,10 @@ NOTE: For each of these steps, make sure to read the _contents_ of each script b
 
 ### Preparation
 
-1. Run `./download_gnina` to get an executable copy of gnina.
-2. Prepare the receptor using `python prepare_receptor.py`
-3. Prepare the ligands using `python prepare_ligands.py`
+1. Load the GCC v8.4 C++ shared libaries using `module load gcc/8.4.0`
+2. Run `./download_gnina` to get an executable copy of gnina.
+3. Prepare the receptor using `python prepare_receptor.py`
+4. Prepare the ligands using `python prepare_ligands.py`
 
 ### Docking
 
@@ -74,11 +75,12 @@ Running any program that requires substantial computational resources is NOT ALL
 qsub -I -q normal
 ```
 
-This command will submit a queued shell job, and allow you to interact within it for up to 30 minutes (the docking should take less than a minute).  When you are logged into the node, you will be back in your $HOME directory, and in your base conda environment. You will need to change back to your working directory and activate your 'vina' conda environment like so:
+This command will submit a queued shell job, and allow you to interact within it for up to 30 minutes (the docking should take less than a minute).  When you are logged into the node, you will be back in your $HOME directory, and in your base conda environment. You will need to change back to your working directory, activate your 'vina' conda environment, and load the GCC libraries, like so:
 
 ```
 cd ~/work/git/vina_demo   # or wherever your work is
 conda activate vina
+module load gcc/8.4.0
 ```
 
 You now can continue to run scripts on the command line.  The jobs will run on the queued node, not the login node. 
@@ -88,7 +90,40 @@ To exit the interactive job, use
 exit
 ```
 
+### Running a queued job via batch script
 
+If none of the gpu nodes in the `large` queue are free, you can submit a job to the queue using a batch script.  There is lots of good information about the Owlsnest batch system here: https://www.hpc.temple.edu/owlsnest2/batch_system/ 
+
+I have included an example batch script in `batch.sh`, which contains the following text:
+
+```
+#!/bin/sh
+#PBS -l walltime=1:00:00
+#PBS -N docking_gpu 
+#PBS -q large
+#PBS -l nodes=1:ppn=1
+#PBS -m bae
+#PBS -M [AccessNetID]@temple.edu
+#PBS
+cd $PBS_O_WORKDIR
+
+bash ~/.bashrc
+conda activate vina
+module load gcc/8.4.0
+python docking_gpu.py
+```
+
+Replace the `[AccessNetID]` with your own Temple email/AccessNet to get an email notification when it's done.
+
+Submit the batch script using
+```
+qsub batch.sh
+```
+
+To check the status of your job, use
+```
+qstat
+```
 
 
 
