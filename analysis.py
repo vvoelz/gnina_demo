@@ -28,7 +28,7 @@ results = {} # store results in a dictionary
 for method in methods:
 
   # ... and convert # convert our docking poses to mol2
-  run_cmd(f'obabel docking_results/smina_donepezil.sdf -O docking_results/{method}_donepezil.mol2 -m')
+  run_cmd(f'obabel docking_results/{method}_donepezil.sdf -O docking_results/{method}_donepezil.mol2 -m')
 
   for ligand in ['donepezil', 'galantamine', 'huperzine', 'rivastigmine', 'AC6']:
 
